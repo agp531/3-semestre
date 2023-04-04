@@ -23,6 +23,8 @@ public class Cliente{
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+    public void setEmail(String string) {
+    }
 
     
 }
