@@ -5,7 +5,7 @@ public class Locadora {
         Locadora loc = new Locadora();
         loc.menuPrincipal();
     }
-
+    
     public void menuPrincipal(){
         int opcao = -1;
         Scanner scanner = new Scanner(System.in);

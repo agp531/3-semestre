@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GerenciadorVeiculo {
@@ -33,18 +34,19 @@ public class GerenciadorVeiculo {
                 case 1:
                     this.cadastrar();
                     break;
-                case 2:  
+                case 2: 
+                    this.buscarUm(); 
                     break;
                 case 3:
-                    
+                    this.alterar();
                     break; 
                 case 4:
-                    
+                    this.excluir();
                     break;                
                 case 5:
-                    
+                    this.listarTodos();
                     break;     
-                case 6:
+                case 0:
                     break;
             
                 default:
@@ -72,9 +74,97 @@ public class GerenciadorVeiculo {
         if(inserido){
             System.out.println("Veiculo inserido com sucesso.");
         }
-    }   
+    }
 
-    public void consultar(){
+    public void listarTodos(){
+        ArrayList<Veiculo> veiculos = daoVeiculo.buscarTodos();
+        System.out.println("=================");
+        System.out.println("Veiculos cadastrados");
+        for(Veiculo v : veiculos){
+            System.out.println("Código: " + v.getCodigo()
+                + ", Marca: " + v.getMarca()
+                + ", Modelo: " + v.getModelo()
+                + ", Chassi: " + v.getChassi()
+                + ", Ano: : " + v.getAno());
+        }
+        System.out.println("=================");
+    }
+    
+    public void excluir(){
+        System.out.println("=================");
+        System.out.println("Exclusao de veiculos");
+        System.out.println("Informe o codigo: ");
+        int codigo = Integer.parseInt(scanner.nextLine());
+        int qtde = daoVeiculo.excluir(codigo);
+        if(qtde > 0){
+            System.out.println("Veiculo excluido com sucesso!");
+        }else{
+            System.out.println("Nenhum veiculo encontrado..");
+        }
+        System.out.println("=================");
+    }
+
+    public void buscarUm(){
+        System.out.println("=================");
+        System.out.println("Consulta de veiculo");
+        System.out.println("Informe o codigo: ");
+        int codigo = Integer.parseInt(scanner.nextLine());
+        Veiculo v = daoVeiculo.buscarUm(codigo);
+        if(v != null){
+            System.out.println("Marca: " + v.getMarca());
+            System.out.println("Modelo: " + v.getModelo());
+            System.out.println("Chassi: " + v.getChassi());
+            System.out.println("Ano: " + v.getAno());
+        }else{
+            System.out.println("Nenhum veiculo encontrado..");
+        }
+        System.out.println("=================");
+    }
+
+    public void alterar(){
+       
+        System.out.println("-------------------------");
+        System.out.println("[Alteração de Veículo]");
+        System.out.println("Informe o codigo: ");
+        int codigo = Integer.parseInt(scanner.nextLine());
+        Veiculo v = daoVeiculo.buscarUm(codigo);
+        if(v!=null){
+
+            System.out.println("Dados do veiculo");
+            System.out.println("[CODIGO: "+ v.getCodigo() + "]");
+
+            System.out.println("[Marca: " + v.getMarca() + "]");
+            String marca = scanner.nextLine();
+            if(!marca.isEmpty()){
+                v.setModelo(marca);
+            }
+
+            System.out.println("[Modelo: " + v.getModelo() + "]");
+            String modelo = scanner.nextLine();
+            if(!modelo.isEmpty()){
+                v.setModelo(modelo);
+            }
+            
+            System.out.println("[Chassi: " + v.getChassi() + "]");
+            String chassi = scanner.nextLine();
+            if(!chassi.isEmpty()){
+                v.setModelo(chassi);
+            }
+            
+            System.out.println("[Ano: " + v.getAno() + "]");
+            String ano = scanner.nextLine();
+            if(!ano.isEmpty()){
+                v.setAno(Integer.parseInt(ano));
+            }
+
+            int qtdeAlterado = daoVeiculo.alterar(v);
+            if(qtdeAlterado > 0){
+                System.out.println("Veiculo atualizado!");
+            }
+
+        }else{
+            System.out.println("Veiculo nao encontrado..");
+        }
 
     }
 }
