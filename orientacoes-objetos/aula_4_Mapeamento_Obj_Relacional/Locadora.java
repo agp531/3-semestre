@@ -14,6 +14,7 @@ public class Locadora {
             System.out.println("   | MENU PRINCIPAL |     ");
             System.out.println("[1] Gerenciar Veiculos    ");
             System.out.println("[2] Gerenciar Cliente     ");
+            System.out.println("[3] Gerenciar Cliente PJ  ");
             System.out.println("[0] Sair                  ");
             System.out.println("\n------------------------");
 
@@ -31,11 +32,18 @@ public class Locadora {
                     break;  
                 
                 case 2:
-                    
+                    GerenciadorCliente auxC = new GerenciadorCliente();
+                    auxC.menu();
+                    break;
+                
+                case 3:
+                    GerenciadorClientePJ auxPj = new GerenciadorClientePJ();
+                    auxPj.menu();
                     break;
                 
                 case 0:
                     System.out.println("Saindo...");
+                    scanner.close();
                     break;
             
                 default:

@@ -94,6 +94,8 @@ public class DaoVeiculo {
         return resultados;
     }
 
+
+
     public Veiculo buscarUm(int cod){
         Veiculo v = null;
         try {
@@ -114,6 +116,8 @@ public class DaoVeiculo {
         }
         return v;
     }
+
+    
 
 
     public int excluir (int cod){
